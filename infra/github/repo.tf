@@ -2,9 +2,8 @@ module "repo" {
   source = "github.com/kad-products/platform//open-tofu/modules/github-repo?ref=v1.21.0"
 
   repo_name        = var.repo_name
-  repo_description = "RedwoodSDK Template repo"
+  repo_description = "App to manage a gratitude journal built on the AT Protocol"
   is_product       = true
-  is_template      = true
   required_checks = [
     "test-cli / run-tests",
     "lint-cli / lint-code",

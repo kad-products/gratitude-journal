@@ -13,7 +13,7 @@ export function DefaultLayout({
 	return (
 		<StrictMode>
 			<header className="default-header">
-				<h1 className="welcome-title">KAD RWSDK Template</h1>
+				<h1 className="welcome-title">grATitude journal</h1>
 				<nav className="main-nav">
 					<a
 						className={classNames({

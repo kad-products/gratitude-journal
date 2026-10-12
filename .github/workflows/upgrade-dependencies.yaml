@@ -2,8 +2,8 @@ name: Upgrade Dependencies
 
 on:
   schedule:
-    # Weekly on Friday at 02:00 UTC
-    - cron: '0 2 * * 5'
+    # Weekly on Sunday at 19:00 UTC
+    - cron: '0 19 * * 0'
   push:
     branches:
       - main

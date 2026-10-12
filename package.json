@@ -1,8 +1,8 @@
 {
-	"name": "@kad-products/tmplt-rwsdk",
-	"version": "1.2.0",
+	"name": "@kad-products/gratitude-journal",
+	"version": "0.0.0",
 	"private": true,
-	"description": "A github template repo for RedwoodSDK projects",
+	"description": "App to manage a gratitude journal built on the AT Protocol",
 	"keywords": [],
 	"license": "MIT",
 	"author": "",
