@@ -20,6 +20,8 @@
 		"deploy": "rw-scripts ensure-deploy-env && npm run clean && vite build --mode $CLOUDFLARE_ENV && wrangler deploy --env $CLOUDFLARE_ENV",
 		"dev": "vite dev --host",
 		"dev:init": "rw-scripts dev-init",
+		"docker:down": "docker compose -f docker-compose.dev.yml -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml --project-directory . down -v",
+		"docker:up": "docker compose -f docker-compose.dev.yml -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml --project-directory . up -d --build",
 		"generate": "rw-scripts ensure-env && wrangler types --include-runtime false && tsx scripts/fix-env-types.ts",
 		"knip:check": "knip",
 		"knip:fix": "knip --fix",
@@ -63,5 +65,12 @@
 		"vitest": "^4.1.11",
 		"wrangler": "4.114.0"
 	},
-	"packageManager": "pnpm@12.6.0"
+	"packageManager": "pnpm@12.6.0",
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": "26.x",
+			"onFail": "download"
+		}
+	}
 }
