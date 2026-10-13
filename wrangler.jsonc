@@ -26,7 +26,17 @@
 	"vars": {
 		"KAD_PRODUCTS_ENVIRONMENT": "development",
 		"LOG_LEVEL": "debug",
-		"LOG_LEVEL_TASK_OVERRIDE": ""
+		"LOG_LEVEL_TASK_OVERRIDE": "",
+		"ATPROTO_PDS_URL": "http://pds:3000",
+		"ATPROTO_PLC_URL": "http://plc:2582",
+		// The PDS's canonical public URL (as it appears in DID documents and OAuth metadata).
+		// With PDS_HOSTNAME=localhost the PDS uses http://localhost:3000 as its public URL.
+		// Worker-side fetches to this URL are rewritten to ATPROTO_PDS_URL (http://pds:3000) so
+		// the worker reaches the PDS via Docker networking rather than the host loopback.
+		"ATPROTO_PDS_CANONICAL_URL": "http://localhost:3000",
+		// The browser-accessible URL for the PDS's OAuth authorization page.
+		// Same as canonical since localhost:3000 is directly reachable from the host browser.
+		"ATPROTO_PDS_BROWSER_URL": "http://localhost:3000"
 	},
 	"env": {
 		"integration": {

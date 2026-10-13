@@ -20,8 +20,8 @@
 		"deploy": "rw-scripts ensure-deploy-env && npm run clean && vite build --mode $CLOUDFLARE_ENV && wrangler deploy --env $CLOUDFLARE_ENV",
 		"dev": "vite dev --host",
 		"dev:init": "rw-scripts dev-init",
-		"docker:down": "docker compose -f docker-compose.dev.yml -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml --project-directory . down -v",
-		"docker:up": "docker compose -f docker-compose.dev.yml -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml --project-directory . up -d --build",
+		"docker:down": "APP_DIR=$(pwd) docker compose -p gratitude-journal -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml -f docker-compose.dev.yml down -v",
+		"docker:up": "APP_DIR=$(pwd) docker compose -p gratitude-journal -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml -f docker-compose.dev.yml up --build",
 		"generate": "rw-scripts ensure-env && wrangler types --include-runtime false && tsx scripts/fix-env-types.ts",
 		"knip:check": "knip",
 		"knip:fix": "knip --fix",
@@ -36,8 +36,13 @@
 		"types:check": "tsc"
 	},
 	"dependencies": {
+		"@atproto/common-web": "^0.5.14",
+		"@atproto/oauth-client-node": "^0.5.9",
+		"@atproto/syntax": "^0.7.6",
+		"@atproto/tap": "^0.4.12",
 		"@kad-products/shed": "^1.0.0",
 		"classnames": "^2.5.1",
+		"cookie": "^2.0.1",
 		"react": "19.3.0",
 		"react-dom": "19.3.0",
 		"rwsdk": "1.3.0"
