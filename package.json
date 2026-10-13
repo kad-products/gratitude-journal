@@ -36,10 +36,7 @@
 		"types:check": "tsc"
 	},
 	"dependencies": {
-		"@atproto/common-web": "^0.5.14",
 		"@atproto/oauth-client-node": "^0.5.9",
-		"@atproto/syntax": "^0.7.6",
-		"@atproto/tap": "^0.4.12",
 		"@kad-products/shed": "^1.0.0",
 		"classnames": "^2.5.1",
 		"cookie": "^2.0.1",

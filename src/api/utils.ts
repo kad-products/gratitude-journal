@@ -29,10 +29,6 @@ function serializeCause(cause: unknown): unknown {
 	return cause;
 }
 
-export function errorResponse(error: string, status: number = 400): Response {
-	return Response.json({ success: false, error }, { status });
-}
-
 export function successResponse<T>(data: T, status: number = 200): Response {
 	return Response.json({ success: true, data }, { status });
 }
