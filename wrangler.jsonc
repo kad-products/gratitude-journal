@@ -40,16 +40,34 @@
 	},
 	"env": {
 		"integration": {
+			"routes": [
+				{
+					"pattern": "gratitude.int.kad-rezept.com",
+					"custom_domain": true
+				}
+			],
 			"vars": {
 				"KAD_PRODUCTS_ENVIRONMENT": "integration"
 			}
 		},
 		"staging": {
+			"routes": [
+				{
+					"pattern": "gratitude.stg.kad-rezept.com",
+					"custom_domain": true
+				}
+			],
 			"vars": {
 				"KAD_PRODUCTS_ENVIRONMENT": "staging"
 			}
 		},
 		"production": {
+			"routes": [
+				{
+					"pattern": "gratitude.kad-rezept.com",
+					"custom_domain": true
+				}
+			],
 			"vars": {
 				"KAD_PRODUCTS_ENVIRONMENT": "production"
 			}
