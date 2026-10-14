@@ -1,6 +1,6 @@
 {
 	"name": "@kad-products/gratitude-journal",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"private": true,
 	"description": "App to manage a gratitude journal built on the AT Protocol",
 	"keywords": [],
