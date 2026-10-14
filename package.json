@@ -1,8 +1,8 @@
 {
-	"name": "@kad-products/tmplt-rwsdk",
-	"version": "1.2.0",
+	"name": "@kad-products/gratitude-journal",
+	"version": "0.0.0",
 	"private": true,
-	"description": "A github template repo for RedwoodSDK projects",
+	"description": "App to manage a gratitude journal built on the AT Protocol",
 	"keywords": [],
 	"license": "MIT",
 	"author": "",
@@ -20,6 +20,8 @@
 		"deploy": "rw-scripts ensure-deploy-env && npm run clean && vite build --mode $CLOUDFLARE_ENV && wrangler deploy --env $CLOUDFLARE_ENV",
 		"dev": "vite dev --host",
 		"dev:init": "rw-scripts dev-init",
+		"docker:down": "APP_DIR=$(pwd) docker compose -p gratitude-journal -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml -f docker-compose.dev.yml down -v",
+		"docker:up": "APP_DIR=$(pwd) docker compose -p gratitude-journal -f ../../OpenMeet-Team/atproto-devnet/docker-compose.yml -f docker-compose.dev.yml up --build",
 		"generate": "rw-scripts ensure-env && wrangler types --include-runtime false && tsx scripts/fix-env-types.ts",
 		"knip:check": "knip",
 		"knip:fix": "knip --fix",
@@ -34,8 +36,10 @@
 		"types:check": "tsc"
 	},
 	"dependencies": {
+		"@atproto/oauth-client-node": "^0.5.9",
 		"@kad-products/shed": "^1.0.0",
 		"classnames": "^2.5.1",
+		"cookie": "^2.0.1",
 		"react": "19.3.0",
 		"react-dom": "19.3.0",
 		"rwsdk": "1.3.0"
@@ -63,5 +67,12 @@
 		"vitest": "^4.1.11",
 		"wrangler": "4.114.0"
 	},
-	"packageManager": "pnpm@12.6.0"
+	"packageManager": "pnpm@12.6.0",
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": "26.x",
+			"onFail": "download"
+		}
+	}
 }

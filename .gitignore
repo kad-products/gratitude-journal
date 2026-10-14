@@ -75,3 +75,6 @@ coverage
 terraform.tfstate*
 *.tfvars.backup
 *.tfvars*
+
+# lexicons
+/src/lexicons

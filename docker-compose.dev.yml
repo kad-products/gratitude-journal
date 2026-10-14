@@ -1,0 +1,72 @@
+# Pulled from devnet's test file
+
+secrets:
+  NODE_AUTH_TOKEN:
+    environment: NODE_AUTH_TOKEN
+
+services:
+  gratitude-journal:
+    build:
+      context: ${APP_DIR}
+      secrets:
+        - NODE_AUTH_TOKEN
+    ports:
+      - "5173:5173"
+    volumes:
+      - ${APP_DIR}/src:/app/src
+      - ${APP_DIR}/wrangler.jsonc:/app/wrangler.jsonc
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - atproto-devnet
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${DEVNET_DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DEVNET_DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DEVNET_DB_NAME:-plc}
+    ports:
+      - "${DEVNET_POSTGRES_PORT:-5433}:5432"
+    networks:
+      - atproto-devnet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DEVNET_DB_USER:-postgres}"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  maildev:
+    image: maildev/maildev:latest
+    ports:
+      - "${DEVNET_MAILDEV_WEB_PORT:-1081}:1080"
+      - "${DEVNET_MAILDEV_SMTP_PORT:-1026}:1025"
+    networks:
+      - atproto-devnet
+
+  # Override PLC/PDS to depend on test postgres/maildev
+  plc:
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      LOG_LEVEL: warn
+
+  pds:
+    environment:
+      PDS_EMAIL_SMTP_URL: smtp://maildev:1025
+      LOG_LEVEL: warn
+      # PDS_HOSTNAME=localhost makes the PDS use http://localhost:<PDS_PORT> as its public URL.
+      # This lets the browser's Origin header (http://localhost:3000) match what the PDS expects,
+      # satisfying the OAuth provider's validateOrigin check without requiring TLS or a DNS entry.
+      PDS_HOSTNAME: localhost
+      # PDS_DEV_MODE bypasses the "Resource URL must use the https scheme" check, allowing the
+      # PDS to serve its OAuth endpoints over plain HTTP when PDS_HOSTNAME=localhost.
+      PDS_DEV_MODE: "true"
+
+  tap:
+    environment:
+      TAP_LOG_LEVEL: warn
+
+  jetstream:
+    environment:
+      JETSTREAM_LOG_LEVEL: warn
